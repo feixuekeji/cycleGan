@@ -174,7 +174,7 @@ class GeneratorB(nn.Module):
             model += [ResidualBlock(out_features)]
 
         # Upsampling
-        for _ in range(1):
+        for _ in range(2):
             out_features //= 2
             model += [
                 nn.Upsample(scale_factor=2),
