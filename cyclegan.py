@@ -116,10 +116,10 @@ if __name__ == '__main__':
 
     if opt.epoch != 0:
         # Load pretrained models
-        G_AB.load_state_dict(torch.load("saved_models/%s/G_AB_%d.pth" % (opt.dataset_name, opt.epoch)))
-        G_BA.load_state_dict(torch.load("saved_models/%s/G_BA_%d.pth" % (opt.dataset_name, opt.epoch)))
-        D_A.load_state_dict(torch.load("saved_models/%s/D_A_%d.pth" % (opt.dataset_name, opt.epoch)))
-        D_B.load_state_dict(torch.load("saved_models/%s/D_B_%d.pth" % (opt.dataset_name, opt.epoch)))
+        G_AB.load_state_dict(torch.load("%s/%s/G_AB_%d.pth" % (opt.save_model_path, opt.dataset_name, opt.epoch)))
+        G_BA.load_state_dict(torch.load("%s/%s/G_BA_%d.pth" % (opt.save_model_path, opt.dataset_name, opt.epoch)))
+        D_A.load_state_dict(torch.load("%s/%s/D_A_%d.pth" % (opt.save_model_path, opt.dataset_name, opt.epoch)))
+        D_B.load_state_dict(torch.load("%s/%s/D_B_%d.pth" % (opt.save_model_path, opt.dataset_name, opt.epoch)))
     else:
         # Initialize weights
         G_AB.apply(weights_init_normal)
@@ -328,9 +328,9 @@ if __name__ == '__main__':
         lr_scheduler_D_A.step()
         lr_scheduler_D_B.step()
 
-        if opt.checkpoint_interval != -1 and epoch % opt.checkpoint_interval == 0:
+        if opt.checkpoint_interval > 0 and epoch % opt.checkpoint_interval == 0:
             # Save model checkpoints
-            torch.save(G_AB.state_dict(), "saved_models/%s/G_AB_%d.pth" % (opt.dataset_name, epoch))
-            torch.save(G_BA.state_dict(), "saved_models/%s/G_BA_%d.pth" % (opt.dataset_name, epoch))
-            torch.save(D_A.state_dict(), "saved_models/%s/D_A_%d.pth" % (opt.dataset_name, epoch))
-            torch.save(D_B.state_dict(), "saved_models/%s/D_B_%d.pth" % (opt.dataset_name, epoch))
+            torch.save(G_AB.state_dict(), "%s/%s/G_AB_%d.pth" % (opt.save_model_path, opt.dataset_name, epoch))
+            torch.save(G_BA.state_dict(), "%s/%s/G_BA_%d.pth" % (opt.save_model_path, opt.dataset_name, epoch))
+            torch.save(D_A.state_dict(), "%s/%s/D_A_%d.pth" % (opt.save_model_path, opt.dataset_name, epoch))
+            torch.save(D_B.state_dict(), "%s/%s/D_B_%d.pth" % (opt.save_model_path, opt.dataset_name, epoch))

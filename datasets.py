@@ -6,7 +6,8 @@ from torch.utils.data import Dataset
 from PIL import Image
 import torchvision.transforms as transforms
 import matplotlib.pyplot as plt
-
+import torch.multiprocessing
+torch.multiprocessing.set_sharing_strategy('file_system')
 def to_rgb(image):
     # rgb_image = Image.new("RGB", image.size)
     # rgb_image.paste(image)
